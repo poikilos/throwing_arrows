@@ -16,3 +16,7 @@ throwing.enable_build_arrow = true
 
 throwing.arrow_teleport_in_protected = true
 ```
+
+## Screenshot
+
+![Screenshot](screenshot.png)
