@@ -208,7 +208,7 @@ if get_setting("drop_arrow") then
 		on_hit = function(self, _, last_pos, _, _, hitter, data)
 			minetest.item_drop(ItemStack(data.itemstack), hitter, last_pos)
 		end,
-		on_hit_fails = function(_, thrower, data)
+		on_hit_fails = function(self, _, thrower, data)
 			if not minetest.setting_getbool("creative_mode") then
 				thrower:get_inventory():set_stack("main", data.index, data.itemstack)
 			end
