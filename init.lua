@@ -173,17 +173,24 @@ if get_setting("build_arrow") then
 		description = "Build Arrow",
 		tiles = {"throwing_arrow_build.png", "throwing_arrow_build.png", "throwing_arrow_build_back.png", "throwing_arrow_build_front.png", "throwing_arrow_build_2.png", "throwing_arrow_build.png"},
 		on_hit_sound = "throwing_build_arrow",
-		on_hit = function(self, _, last_pos, _, _, hitter)
+		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
 				minetest.log("warning", "[throwing] BUG: node at last_pos was not air")
 				return
 			end
-			local playername = hitter:get_player_name()
-			if minetest.is_protected(last_pos, playername) then
-				minetest.record_protection_violation(last_pos, playername)
-				return false, "protected position"
+
+			local r_pos = vector.round(pos)
+			local r_last_pos = vector.round(last_pos)
+			-- Make sure that only one key is different
+			if r_pos.y ~= r_last_pos.y then
+				r_last_pos.x = r_pos.x
+				r_last_pos.z = r_pos.z
+			elseif r_pos.x ~= r_last_pos.x then
+				r_last_pos.y = r_pos.y
+				r_last_pos.z = r_pos.z
 			end
-			return minetest.place_node(last_pos, {name="default:obsidian_glass"})
+			minetest.registered_items["default:obsidian_glass"].on_place(ItemStack("default:obsidian_glass"), hitter,
+					{type="node", under=r_pos, above=r_last_pos})
 		end
 	})
 end
