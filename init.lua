@@ -63,6 +63,7 @@ if get_setting("arrow") then
 			if object then
 				object:punch(hitter, 1, {
 					full_punch_interval = 1,
+					max_drop_level = 1,
 					damage_groups = {fleshy = 3}
 				})
 			elseif node then
@@ -86,6 +87,7 @@ if get_setting("golden_arrow") then
 		on_hit = function(self, pos, _, _, object, hitter)
 			object:punch(hitter, 1, {
 				full_punch_interval = 1,
+				max_drop_level = 1,
 				damage_groups = {fleshy = 5}
 			})
 		end
@@ -104,6 +106,7 @@ if get_setting("diamond_arrow") then
 		on_hit = function(self, pos, _, _, object, hitter)
 			object:punch(hitter, 1, {
 				full_punch_interval = 1,
+				max_drop_level = 1,
 				damage_groups = {fleshy = 8}
 			})
 		end
