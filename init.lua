@@ -92,6 +92,24 @@ if get_setting("golden_arrow") then
 	})
 end
 
+if get_setting("diamond_arrow") then
+	throwing.register_arrow("throwing:arrow_diamond", {
+		itemcraft = "default:diamond",
+		craft_quantity = 16,
+		description = "Diamond Arrow",
+		tiles = {"throwing_arrow_diamond.png", "throwing_arrow_diamond.png", "throwing_arrow_diamond_back.png", "throwing_arrow_diamond_front.png", "throwing_arrow_diamond_2.png", "throwing_arrow_diamond.png"},
+		target = throwing.target_object,
+		allow_protected = true,
+		on_hit_sound = "throwing_arrow",
+		on_hit = function(self, pos, _, _, object, hitter)
+			object:punch(hitter, 1, {
+				full_punch_interval = 1,
+				damage_groups = {fleshy = 8}
+			})
+		end
+	})
+end
+
 if get_setting("dig_arrow") then
 	throwing.register_arrow("throwing:arrow_dig", {
 		itemcraft = "default:pick_wood",
@@ -119,7 +137,7 @@ end
 
 if get_setting("teleport_arrow") then
 	throwing.register_arrow("throwing:arrow_teleport", {
-		itemcraft = "default:diamond",
+		itemcraft = "default:mese_crystal",
 		description = "Teleport Arrow",
 		tiles = {"throwing_arrow_teleport.png", "throwing_arrow_teleport.png", "throwing_arrow_teleport_back.png", "throwing_arrow_teleport_front.png", "throwing_arrow_teleport_2.png", "throwing_arrow_teleport.png"},
 		allow_protected = true,
