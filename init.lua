@@ -97,7 +97,7 @@ end
 if get_setting("diamond_arrow") then
 	throwing.register_arrow("throwing:arrow_diamond", {
 		itemcraft = "default:diamond",
-		craft_quantity = 16,
+		craft_quantity = 4,
 		description = "Diamond Arrow",
 		tiles = {"throwing_arrow_diamond.png", "throwing_arrow_diamond.png", "throwing_arrow_diamond_back.png", "throwing_arrow_diamond_front.png", "throwing_arrow_diamond_2.png", "throwing_arrow_diamond.png"},
 		target = throwing.target_object,
@@ -107,7 +107,7 @@ if get_setting("diamond_arrow") then
 			object:punch(hitter, 1, {
 				full_punch_interval = 1,
 				max_drop_level = 1,
-				damage_groups = {fleshy = 8}
+				damage_groups = {fleshy = 7}
 			})
 		end
 	})
