@@ -170,11 +170,11 @@ if get_setting("teleport_arrow") then
 				return
 			end
 
-			if minetest.setting_getbool("throwing.allow_teleport_in_protected") == false then
+			if minetest.settings:get_bool("throwing.allow_teleport_in_protected") == false then
 				return false
 			end
 
-			hitter:moveto(last_pos)
+			hitter:move_to(last_pos)
 		end
 	})
 end
@@ -256,7 +256,7 @@ if get_setting("drop_arrow") then
 			minetest.item_drop(ItemStack(data.itemstack), hitter, last_pos)
 		end,
 		on_hit_fails = function(self, _, thrower, data)
-			if not minetest.setting_getbool("creative_mode") then
+			if not minetest.settings:get_bool("creative_mode") then
 				thrower:get_inventory():set_stack("main", data.index, data.itemstack)
 			end
 		end
