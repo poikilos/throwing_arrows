@@ -1,42 +1,44 @@
+-- Translation support
+local S = minetest.get_translator("throwing_arrows")
 throwing.register_bow(":throwing:bow_wood", {
 	itemcraft = "default:wood",
-	description = "Wooden Bow",
+	description = S("Wooden Bow"),
 	texture = "throwing_bow_wood.png",
 	uses = 50
 })
 throwing.register_bow(":throwing:bow_stone", {
 	itemcraft = "default:cobble",
-	description = "Stone Bow",
+	description = S("Stone Bow"),
 	texture = "throwing_bow_stone.png",
 	uses = 100
 })
 throwing.register_bow(":throwing:bow_steel", {
 	itemcraft = "default:steel_ingot",
-	description = "Steel Bow",
+	description = S("Steel Bow"),
 	texture = "throwing_bow_steel.png",
 	uses = 150
 })
 throwing.register_bow(":throwing:bow_bronze", {
 	itemcraft = "default:bronze_ingot",
-	description = "Bronze Bow",
+	description = S("Bronze Bow"),
 	texture = "throwing_bow_bronze.png",
 	uses = 200
 })
 throwing.register_bow(":throwing:bow_gold", {
-	itemcraft = "default:gold_ingot",
+	itemcraft = S("default:gold_ingot"),
 	description = "Gold Bow",
 	texture = "throwing_bow_gold.png",
 	uses = 250
 })
 throwing.register_bow(":throwing:bow_mese", {
 	itemcraft = "default:mese_crystal",
-	description = "Mese Bow",
+	description = S("Mese Bow"),
 	texture = "throwing_bow_mese.png",
 	uses = 300
 })
 throwing.register_bow(":throwing:bow_diamond", {
 	itemcraft = "default:diamond",
-	description = "Diamond Bow",
+	description = S("Diamond Bow"),
 	texture = "throwing_bow_diamond.png",
 	uses = 320
 })
@@ -73,7 +75,7 @@ if get_setting("arrow") then
 	throwing.register_arrow("throwing:arrow", {
 		itemcraft = "default:steel_ingot",
 		craft_quantity = 16,
-		description = "Arrow",
+		description = S("Arrow"),
 		tiles = {"throwing_arrow.png", "throwing_arrow.png", "throwing_arrow_back.png", "throwing_arrow_front.png", "throwing_arrow_2.png", "throwing_arrow.png"},
 		target = throwing.target_both,
 		allow_protected = true,
@@ -98,7 +100,7 @@ if get_setting("golden_arrow") then
 	throwing.register_arrow("throwing:arrow_gold", {
 		itemcraft = "default:gold_ingot",
 		craft_quantity = 16,
-		description = "Golden Arrow",
+		description = S("Golden Arrow"),
 		tiles = {"throwing_arrow_gold.png", "throwing_arrow_gold.png", "throwing_arrow_gold_back.png", "throwing_arrow_gold_front.png", "throwing_arrow_gold_2.png", "throwing_arrow_gold.png"},
 		target = throwing.target_object,
 		allow_protected = true,
@@ -117,7 +119,7 @@ if get_setting("diamond_arrow") then
 	throwing.register_arrow("throwing:arrow_diamond", {
 		itemcraft = "default:diamond",
 		craft_quantity = 4,
-		description = "Diamond Arrow",
+		description = S("Diamond Arrow"),
 		tiles = {"throwing_arrow_diamond.png", "throwing_arrow_diamond.png", "throwing_arrow_diamond_back.png", "throwing_arrow_diamond_front.png", "throwing_arrow_diamond_2.png", "throwing_arrow_diamond.png"},
 		target = throwing.target_object,
 		allow_protected = true,
@@ -135,7 +137,7 @@ end
 if get_setting("dig_arrow") then
 	throwing.register_arrow("throwing:arrow_dig", {
 		itemcraft = "default:pick_wood",
-		description = "Dig Arrow",
+		description = S("Dig Arrow"),
 		tiles = {"throwing_arrow_dig.png", "throwing_arrow_dig.png", "throwing_arrow_dig_back.png", "throwing_arrow_dig_front.png", "throwing_arrow_dig_2.png", "throwing_arrow_dig.png"},
 		target = throwing.target_node,
 		on_hit_sound = "throwing_dig_arrow",
@@ -147,7 +149,7 @@ end
 
 if get_setting("dig_arrow_admin") then
 	throwing.register_arrow("throwing:arrow_dig_admin", {
-		description = "Admin Dig Arrow",
+		description = S("Admin Dig Arrow"),
 		tiles = {"throwing_arrow_dig.png", "throwing_arrow_dig.png", "throwing_arrow_dig_back.png", "throwing_arrow_dig_front.png", "throwing_arrow_dig_2.png", "throwing_arrow_dig.png"},
 		target = throwing.target_node,
 		on_hit = function(self, pos, _, node, _, _)
@@ -160,13 +162,13 @@ end
 if get_setting("teleport_arrow") then
 	throwing.register_arrow("throwing:arrow_teleport", {
 		itemcraft = "default:mese_crystal",
-		description = "Teleport Arrow",
+		description = S("Teleport Arrow"),
 		tiles = {"throwing_arrow_teleport.png", "throwing_arrow_teleport.png", "throwing_arrow_teleport_back.png", "throwing_arrow_teleport_front.png", "throwing_arrow_teleport_2.png", "throwing_arrow_teleport.png"},
 		allow_protected = true,
 		on_hit_sound = "throwing_teleport_arrow",
 		on_hit = function(self, _, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log("warning", "[throwing] BUG: node at last_pos was not air")
+				minetest.log("warning", S("[throwing] BUG: node at @1 was not air", last_pos))
 				return
 			end
 
@@ -182,12 +184,12 @@ end
 if get_setting("fire_arrow") then
 	throwing.register_arrow("throwing:arrow_fire", {
 		itemcraft = "default:torch",
-		description = "Torch Arrow",
+		description = S("Torch Arrow"),
 		tiles = {"throwing_arrow_fire.png", "throwing_arrow_fire.png", "throwing_arrow_fire_back.png", "throwing_arrow_fire_front.png", "throwing_arrow_fire_2.png", "throwing_arrow_fire.png"},
 		on_hit_sound = "default_place_node",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log("warning", "[throwing] BUG: node at last_pos was not air")
+				minetest.log(S("warning", "[throwing] BUG: node at @1 was not air", last_pos))
 				return
 			end
 
@@ -210,12 +212,12 @@ end
 if get_setting("build_arrow") then
 	throwing.register_arrow("throwing:arrow_build", {
 		itemcraft = "default:obsidian_glass",
-		description = "Build Arrow",
+		description = S("Build Arrow"),
 		tiles = {"throwing_arrow_build.png", "throwing_arrow_build.png", "throwing_arrow_build_back.png", "throwing_arrow_build_front.png", "throwing_arrow_build_2.png", "throwing_arrow_build.png"},
 		on_hit_sound = "throwing_build_arrow",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log("warning", "[throwing] BUG: node at last_pos was not air")
+				minetest.log(S("warning", "[throwing] BUG: node at @1 was not air", last_pos))
 				return
 			end
 
@@ -239,7 +241,7 @@ if get_setting("drop_arrow") then
 	throwing.register_arrow("throwing:arrow_drop", {
 		itemcraft = "default:copper_ingot",
 		craft_quantity = 16,
-		description = "Drop Arrow",
+		description = S("Drop Arrow"),
 		tiles = {"throwing_arrow_drop.png", "throwing_arrow_drop.png", "throwing_arrow_drop_back.png", "throwing_arrow_drop_front.png", "throwing_arrow_drop_2.png", "throwing_arrow_drop.png"},
 		on_hit_sound = "throwing_build_arrow",
 		allow_protected = true,
