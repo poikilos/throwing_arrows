@@ -5,9 +5,9 @@ local function register_bow_craft(name, itemcraft)
 	minetest.register_craft({
 		output = "throwing:" .. name,
 		recipe = {
-			{"farming:cotton", itemcraft, ""},
-			{"farming:cotton", "", itemcraft},
-			{"farming:cotton", itemcraft, ""},
+			{"farming:string", itemcraft, ""},
+			{"farming:string", "", itemcraft},
+			{"farming:string", itemcraft, ""},
 		}
 	})
 end
