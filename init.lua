@@ -210,7 +210,7 @@ if get_setting("teleport_arrow") then
 		on_hit_sound = "throwing_teleport_arrow",
 		on_hit = function(self, _, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log("warning", S("[throwing] BUG: node at @1 was not air", last_pos))
+				minetest.log("warning", "[throwing] BUG: node at "..minetest.pos_to_string(last_pos).." was not air")
 				return
 			end
 
@@ -232,7 +232,7 @@ if get_setting("fire_arrow") then
 		on_hit_sound = "default_place_node",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log(S("warning", "[throwing] BUG: node at @1 was not air", last_pos))
+				minetest.log("warning", "[throwing] BUG: node at "..minetest.pos_to_string(last_pos).." was not air")
 				return
 			end
 
@@ -261,7 +261,7 @@ if get_setting("build_arrow") then
 		on_hit_sound = "throwing_build_arrow",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
-				minetest.log(S("warning", "[throwing] BUG: node at @1 was not air", last_pos))
+				minetest.log("warning", "[throwing] BUG: node at "..minetest.pos_to_string(last_pos).." was not air")
 				return
 			end
 
