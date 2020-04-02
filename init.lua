@@ -15,49 +15,56 @@ end
 throwing.register_bow(":throwing:bow_wood", {
 	description = S("Wooden Bow"),
 	texture = "throwing_bow_wood.png",
-	uses = 50
+	uses = 50,
+	strength = .5
 })
 register_bow_craft("bow_wood", "default:wood")
 
 throwing.register_bow(":throwing:bow_stone", {
 	description = S("Stone Bow"),
 	texture = "throwing_bow_stone.png",
-	uses = 100
+	uses = 100,
+	strength = .65
 })
 register_bow_craft("bow_stone", "default:cobble")
 
 throwing.register_bow(":throwing:bow_steel", {
 	description = S("Steel Bow"),
 	texture = "throwing_bow_steel.png",
-	uses = 150
+	uses = 150,
+	strength = .8
 })
 register_bow_craft("bow_steel", "default:steel_ingot")
 
 throwing.register_bow(":throwing:bow_bronze", {
 	description = S("Bronze Bow"),
 	texture = "throwing_bow_bronze.png",
-	uses = 200
+	uses = 200,
+	strength = .95
 })
 register_bow_craft("bow_bronze", "default:bronze_ingot")
 
 throwing.register_bow(":throwing:bow_gold", {
 	description = S("Gold Bow"),
 	texture = "throwing_bow_gold.png",
-	uses = 250
+	uses = 250,
+	strength = 1.1
 })
 register_bow_craft("bow_gold", "default:gold_ingot")
 
 throwing.register_bow(":throwing:bow_mese", {
 	description = S("Mese Bow"),
 	texture = "throwing_bow_mese.png",
-	uses = 300
+	uses = 300,
+	strength = 1.25
 })
 register_bow_craft("bow_mese", "default:mese_crystal")
 
 throwing.register_bow(":throwing:bow_diamond", {
 	description = S("Diamond Bow"),
 	texture = "throwing_bow_diamond.png",
-	uses = 320
+	uses = 320,
+	strength = 1.4
 })
 register_bow_craft("bow_diamond", "default:diamond")
 
@@ -110,6 +117,7 @@ if get_setting("arrow") then
 		tiles = {"throwing_arrow.png", "throwing_arrow.png", "throwing_arrow_back.png", "throwing_arrow_front.png", "throwing_arrow_2.png", "throwing_arrow.png"},
 		target = throwing.target_both,
 		allow_protected = true,
+		mass = 1,
 		on_hit_sound = "throwing_arrow",
 		on_hit = function(self, pos, _, node, object, hitter)
 			if object then
@@ -135,6 +143,7 @@ if get_setting("golden_arrow") then
 		target = throwing.target_object,
 		allow_protected = true,
 		on_hit_sound = "throwing_arrow",
+		mass = 2,
 		on_hit = function(self, pos, _, _, object, hitter)
 			arrow_punch(object, hitter, {
 				full_punch_interval = 0.6,
@@ -153,6 +162,7 @@ if get_setting("diamond_arrow") then
 		target = throwing.target_object,
 		allow_protected = true,
 		on_hit_sound = "throwing_arrow",
+		mass = .7,
 		on_hit = function(self, pos, _, _, object, hitter)
 			arrow_punch(object, hitter, {
 				full_punch_interval = 0.5,
@@ -169,6 +179,7 @@ if get_setting("dig_arrow") then
 		description = S("Dig Arrow"),
 		tiles = {"throwing_arrow_dig.png", "throwing_arrow_dig.png", "throwing_arrow_dig_back.png", "throwing_arrow_dig_front.png", "throwing_arrow_dig_2.png", "throwing_arrow_dig.png"},
 		target = throwing.target_node,
+		mass = 1,
 		on_hit_sound = "throwing_dig_arrow",
 		on_hit = function(self, pos, _, node, _, hitter)
 			return minetest.dig_node(pos)
@@ -182,6 +193,7 @@ if get_setting("dig_arrow_admin") then
 		description = S("Admin Dig Arrow"),
 		tiles = {"throwing_arrow_dig.png", "throwing_arrow_dig.png", "throwing_arrow_dig_back.png", "throwing_arrow_dig_front.png", "throwing_arrow_dig_2.png", "throwing_arrow_dig.png"},
 		target = throwing.target_node,
+		mass = 1,
 		on_hit = function(self, pos, _, node, _, _)
 			minetest.remove_node(pos)
 		end,
@@ -194,6 +206,7 @@ if get_setting("teleport_arrow") then
 		description = S("Teleport Arrow"),
 		tiles = {"throwing_arrow_teleport.png", "throwing_arrow_teleport.png", "throwing_arrow_teleport_back.png", "throwing_arrow_teleport_front.png", "throwing_arrow_teleport_2.png", "throwing_arrow_teleport.png"},
 		allow_protected = true,
+		mass = 1,
 		on_hit_sound = "throwing_teleport_arrow",
 		on_hit = function(self, _, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
@@ -215,6 +228,7 @@ if get_setting("fire_arrow") then
 	throwing.register_arrow("throwing:arrow_fire", {
 		description = S("Torch Arrow"),
 		tiles = {"throwing_arrow_fire.png", "throwing_arrow_fire.png", "throwing_arrow_fire_back.png", "throwing_arrow_fire_front.png", "throwing_arrow_fire_2.png", "throwing_arrow_fire.png"},
+		mass = 1,
 		on_hit_sound = "default_place_node",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
@@ -243,6 +257,7 @@ if get_setting("build_arrow") then
 	throwing.register_arrow("throwing:arrow_build", {
 		description = S("Build Arrow"),
 		tiles = {"throwing_arrow_build.png", "throwing_arrow_build.png", "throwing_arrow_build_back.png", "throwing_arrow_build_front.png", "throwing_arrow_build_2.png", "throwing_arrow_build.png"},
+		mass = 1,
 		on_hit_sound = "throwing_build_arrow",
 		on_hit = function(self, pos, last_pos, _, _, hitter)
 			if minetest.get_node(last_pos).name ~= "air" then
@@ -273,6 +288,7 @@ if get_setting("drop_arrow") then
 		tiles = {"throwing_arrow_drop.png", "throwing_arrow_drop.png", "throwing_arrow_drop_back.png", "throwing_arrow_drop_front.png", "throwing_arrow_drop_2.png", "throwing_arrow_drop.png"},
 		on_hit_sound = "throwing_build_arrow",
 		allow_protected = true,
+		mass = 1,
 		on_throw = function(self, _, thrower, _, index, data)
 			local inventory = thrower:get_inventory()
 			if index >= inventory:get_size("main") or inventory:get_stack("main", index+1):get_name() == "" then
