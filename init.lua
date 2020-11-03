@@ -108,7 +108,7 @@ local function arrow_punch(object, hitter, caps)
 	if time_from_last_punch >= (caps.full_punch_interval or 1) then
 		last_punch_times[hitter_name][player_name] = os.time()
 	end
-	object:punch(hitter, time_from_last_punch, caps)
+	object:punch(hitter, time_from_last_punch, caps, nil)
 end
 
 if get_setting("arrow") then
